@@ -118,7 +118,7 @@ module.exports = configure((/* ctx */) => {
         [
           "unplugin-auto-import/vite",
           {
-            resolvers: [require("onu-ui").OnuResolver],
+            resolvers: [],
             // targets to transform
             include: [/\.tsx?$/, /\.vue$/, /\.vue\?vue/],
 
@@ -138,9 +138,6 @@ module.exports = configure((/* ctx */) => {
               "src/logic/**/*.ts",
               "src/logic/**/*.tsx",
               "src/stores/**/*.ts",
-              "src/composables/*.ts",
-              "src/constants/*.ts",
-              "src/validators/*.ts",
             ],
             eslintrc: {
               enabled: true, // Default `false`

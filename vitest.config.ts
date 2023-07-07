@@ -22,9 +22,9 @@ export default defineConfig({
     vue({
       template: { transformAssetUrls },
     }),
-    quasar({
-      sassVariables: "src/quasar-variables.scss",
-    }),
+    // quasar({
+    //   sassVariables: "src/quasar-variables.scss",
+    // }),
     tsconfigPaths(),
     AutoImport({
       resolvers: [OnuResolver()],
