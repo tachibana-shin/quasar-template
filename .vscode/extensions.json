@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "vue.volar",
+    "wayou.vscode-todo-highlight",
+    "lokalise.i18n-ally",
+    "aaravb.chrome-extension-developer-tools",
+    "codeium.codeium",
+    "ayushsinghal.code-mate",
+    "eamodio.gitlens",
+    "antfu.iconify",
+    "csstools.postcss",
+    "yoavbls.pretty-ts-errors"
+  ],
+  "unwantedRecommendations": [
+    "octref.vetur",
+    "hookyqr.beautify",
+    "dbaeumer.jshint",
+    "ms-vscode.vscode-typescript-tslint-plugin"
+  ]
+}
