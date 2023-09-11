@@ -7,5 +7,5 @@ export function loadLocalize(locale: string) {
 export function getNavigatorLanguage() {
   const lang = self.navigator?.language
 
-  return langs.find((item) => item.code.startsWith(lang)) ?? "en-US"
+  return langs.find((item) => item.code.startsWith(lang))?.code ?? "en-US"
 }
