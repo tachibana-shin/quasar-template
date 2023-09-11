@@ -1,4 +1,7 @@
 {
+  "@quasar/testing-e2e-cypress": {
+    "options": ["scripts", "typescript", "code-coverage"]
+  },
   "@quasar/testing-unit-vitest": {
     "options": ["scripts", "typescript", "ui"]
   }

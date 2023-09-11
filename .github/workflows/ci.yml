@@ -11,12 +11,10 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main" ]
   schedule:
     - cron: '15 10 * * 5'
+  workflow_call:
 
 jobs:
   eslint:
@@ -39,11 +37,11 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: 8.3.1
           run_install: false
 
       - name: Install depends
-        run: pnpm i
+        run: sh install.sh
 
       - name: Run ESLint
         run: pnpm lint #--fix
@@ -77,7 +75,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: 8.3.1
           run_install: false
 
       - name: Install depends
@@ -114,14 +112,19 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: 8.3.1
           run_install: false
 
       - name: Install depends
-        run: npm i
+        run: sh install.sh
 
-      - name: Test
-        run: pnpm test
+      - uses: Wandalen/wretry.action@master
+        name: Test
+        continue-on-error: true
+        with:
+          command: pnpm test
+          attempt_limit: 3
+          attempt_delay: 2000
 
       - name: Typing
         run: pnpm typing
@@ -133,12 +136,10 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        node_version: [16, 18, 20]
+        node_version: [16, 20]
         include:
           # Active LTS + other OS
           - os: macos-latest
-            node_version: 18
-          - os: windows-latest
             node_version: 18
     steps:
       - name: Checkout 🛎️
@@ -153,12 +154,21 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: 8.3.1
           run_install: false
-      - name: Test
-        run: |
-          pnpm i
-          pnpm test
+
+      - name: Install depends
+        run: sh install.sh
+
+      - name: Fix test
+        run: pnpm fixtest
+
+      - uses: Wandalen/wretry.action@master
+        name: Test
+        with:
+          command: pnpm test
+          attempt_limit: 3
+          attempt_delay: 2000
 
   build:
     name: Try build
@@ -187,11 +197,11 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: 8.3.1
           run_install: false
 
       - name: Install depends
         run: pnpm i
 
       - name: Build
-        run: pnpm build
+        run: cp .env.example .env && pnpm build

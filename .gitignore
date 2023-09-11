@@ -38,3 +38,8 @@ yarn-error.log*
 /*.sqlite
 
 /.env
+.nyc_output
+coverage/
+
+# Local Netlify folder
+.netlify

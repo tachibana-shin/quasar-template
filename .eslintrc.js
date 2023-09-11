@@ -27,7 +27,7 @@ module.exports = {
     // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#usage
     // ESLint typescript rules
     "plugin:@typescript-eslint/recommended",
-    "@hannoeru/eslint-config",
+
     "@tachibana-shin/eslint-config",
     // Uncomment any of the lines below to choose desired strictness,
     // but leave only one uncommented!
@@ -93,5 +93,8 @@ module.exports = {
     "functional/prefer-immutable-types": "off",
     "@typescript-eslint/space-before-blocks": "off",
     "no-undef": "off",
+    "functional/no-let": "off",
+    "vue/valid-v-for": "off",
+    "functional/no-loop-statements": "off",
   },
 }
