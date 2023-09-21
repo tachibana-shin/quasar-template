@@ -23,7 +23,7 @@ export const vitePlugins: [
     },
   ],
   [ReWriteAll, {}],
-  [() => RemoveConsole, {}],
+  [RemoveConsole as unknown as any, {}],
   [
     Layouts,
     {

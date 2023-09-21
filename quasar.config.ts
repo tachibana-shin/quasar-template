@@ -17,10 +17,10 @@ import { vitePlugins } from "./vite-plugins"
 
 dotenv.config()
 
-cleanEnv(process.env, {
-  SUPABASE_PROJECT_URL: str(),
-  SUPABASE_PROJECT_KEY: str(),
-})
+// cleanEnv(process.env, {
+//   SUPABASE_PROJECT_URL: str(),
+//   SUPABASE_PROJECT_KEY: str(),
+// })
 
 function removeDataTestAttrs(
   node: RootNode | TemplateChildNode,
