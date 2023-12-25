@@ -6,7 +6,16 @@
   "editor.codeActionsOnSave": ["source.fixAll.eslint"],
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": ["Chương", "othername", "phút", "sakura"],
+  "cSpell.words": [
+    "Chương",
+    "hambur",
+    "lsing",
+    "nettruyen",
+    "Noncomliant",
+    "othername",
+    "phút",
+    "sakura"
+  ],
   "ionic.previewInEditor": true,
   "vue-i18n.i18nPaths": "src/i18n",
   "i18n-ally.keystyle": "flat",
@@ -44,6 +53,26 @@
     "src/components/errors/cloudflare.vue": [")\n      "],
     "src/components/errors/domain-strange.vue": [
       "\n        {{ extensionVersion ?? \""
+    ],
+    "src/components/Card.vue": [
+      "&bull;\n            {{ $t('cap-nhat-ago', [dayjs(data.last_chapters[0].updated_at).fromNow()]) }}\n          "
+    ],
+    "src/components/library/_components/EpControl.vue": [
+      "< data.pages.length\n          ? downloading\n            ? $t(\"dang-tai\")\n            : $t(\"tam-dung\")\n          : $t(\"finished\")\n      }}"
+    ],
+    "src/components/app/AppHeaderSearch.vue": ["Slash"],
+    "src/pages/tim-kiem.vue": ["\nmeta:\n  hiddenHeader: $lt.md\n"],
+    "src/pages/index.vue": ["%"],
+    "src/pages/[...catchAll].vue": ["\nname: not_found\n"],
+    "src/pages/truyen-tranh/[zlug]/index.vue": [
+      "\nmeta:\n  hiddenFooter: true\n  hiddenDrawer: true\n  hiddenHeader: $lt.md\n"
+    ],
+    "src/pages/truyen-tranh/[zlug]/[epName]/[epId].vue": [
+      "\nmeta:\n  hiddenHeader: true\n  hiddenDrawer: true\n  hiddenFooter: true\n"
+    ],
+    "src/components/PluginManagerDialog.vue": ["install plugin"],
+    "uno.config.ts": [
+      "overflow-y-scroll flex-shrink-1 mt-2 text-#eee text-opacity-70"
     ]
   },
   "scss.lint.unknownAtRules": "ignore",
@@ -58,5 +87,18 @@
   "MutableAI.upsell": false,
   "[ruby]": {
     "editor.defaultFormatter": "mbessey.vscode-rufo"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "sonarlint.connectedMode.project": {
+    "connectionId": "manga-raiku",
+    "projectKey": "manga-raiku_manga-raiku"
+  },
+  "[swift]": {
+    "editor.defaultFormatter": "vknabel.vscode-apple-swift-format"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
   }
 }

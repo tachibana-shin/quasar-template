@@ -9,14 +9,17 @@ module.exports = {
   // `parser: 'vue-eslint-parser'` is already included with any 'plugin:vue/**' config and should be omitted
   parserOptions: {
     parser: require.resolve("@typescript-eslint/parser"),
-    extraFileExtensions: [".vue"],
+    project: "tsconfig.json",
+    ecmaVersion: "latest",
+    sourceType: "module",
+    extraFileExtensions: [".vue"]
   },
 
   env: {
     browser: true,
-    es2021: true,
+    es2022: true,
     node: true,
-    "vue/setup-compiler-macros": true,
+    "vue/setup-compiler-macros": true
   },
 
   // Rules order is important, please avoid shuffling them
@@ -27,7 +30,6 @@ module.exports = {
     // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#usage
     // ESLint typescript rules
     "plugin:@typescript-eslint/recommended",
-
     "@tachibana-shin/eslint-config",
     // Uncomment any of the lines below to choose desired strictness,
     // but leave only one uncommented!
@@ -38,7 +40,7 @@ module.exports = {
 
     // https://github.com/prettier/eslint-config-prettier#installation
     // usage with Prettier, provided by 'eslint-config-prettier'.
-    "prettier",
+    "prettier"
   ],
 
   plugins: [
@@ -47,7 +49,7 @@ module.exports = {
 
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-files
     // required to lint *.vue files
-    "vue",
+    "vue"
 
     // https://github.com/typescript-eslint/typescript-eslint/issues/389#issuecomment-509292674
     // Prettier has not been included as plugin to avoid performance impact
@@ -64,7 +66,7 @@ module.exports = {
     __QUASAR_SSR_PWA__: "readonly",
     process: "readonly",
     Capacitor: "readonly",
-    chrome: "readonly",
+    chrome: "readonly"
   },
 
   // add your custom rules here
@@ -96,5 +98,19 @@ module.exports = {
     "functional/no-let": "off",
     "vue/valid-v-for": "off",
     "functional/no-loop-statements": "off",
-  },
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/no-floating-promises": "error",
+    "n/no-unsupported-features/node-builtins": "off",
+    "no-void": [
+      "error",
+      {
+        allowAsStatement: true
+      }
+    ]
+  }
 }

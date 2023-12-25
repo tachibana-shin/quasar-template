@@ -5,6 +5,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "preserveSymlinks": true,
+    "resolveJsonModule": true,
     "noEmitOnError": false,
     /* end */
     "baseUrl": "./",
@@ -12,7 +13,8 @@
       "vitest/globals",
       "vite-plugin-pages/client",
       "vite-plugin-vue-layouts/client",
-      "unplugin-vue-define-options/macros-global"
+      "unplugin-vue-define-options/macros-global",
+      "onu-ui/volar"
     ],
     "esModuleInterop": true,
     "lib": ["esnext", "DOM"]

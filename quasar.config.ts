@@ -6,6 +6,8 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
+import { join } from "path"
+
 // eslint-disable-next-line n/no-extraneous-import
 import type { RootNode, TemplateChildNode } from "@vue/compiler-core"
 import dotenv from "dotenv"
@@ -13,36 +15,44 @@ import { cleanEnv, str } from "envalid"
 import { extend } from "quasar"
 import { configure } from "quasar/wrappers"
 
+import { productName } from "./package.json"
 import { vitePlugins } from "./vite-plugins"
 
 dotenv.config()
 
-// cleanEnv(process.env, {
-//   SUPABASE_PROJECT_URL: str(),
-//   SUPABASE_PROJECT_KEY: str(),
-// })
-
 function removeDataTestAttrs(
-  node: RootNode | TemplateChildNode,
+  node: RootNode | TemplateChildNode
 ): void | (() => void) | (() => void)[] {
   if (node.type === 1 /* NodeTypes.ELEMENT */) {
     node.props = node.props.filter((prop) =>
       prop.type === 6 /* NodeTypes.ATTRIBUTE */
         ? prop.name !== "data-test"
-        : true,
+        : true
     )
   }
 }
 
-export default configure((/* ctx */) => {
+export default configure((/* ctx */ { modeName, prod }) => {
+  const APP_NATIVE_MOBILE = ["capacitor", "cordova"].includes(modeName)
+
+  // cleanEnv(process.env, {
+  //   SUPABASE_PROJECT_URL: str(),
+  //   SUPABASE_PROJECT_KEY: str(),
+  //   ...(APP_NATIVE_MOBILE
+  //     ? {}
+  //     : {
+  //         FIREBASE_CONFIG: json()
+  //       })
+  // })
+
   return {
     eslint: {
-      // fix: true,
+      fix: true,
       // include = [],
       // exclude = [],
       // rawOptions = {},
       warnings: false,
-      errors: false,
+      errors: prod
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
@@ -66,15 +76,15 @@ export default configure((/* ctx */) => {
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      "roboto-font", // optional, you are not bound to it
-      "material-icons", // optional, you are not bound to it
+      // "roboto-font", // optional, you are not bound to it
+      "material-icons" // optional, you are not bound to it
     ],
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
       target: {
         browser: ["es2019", "edge88", "firefox78", "chrome87", "safari13.1"],
-        node: "node16",
+        node: "node16"
       },
 
       vueRouterMode: "history", // available values: 'hash', 'history'
@@ -86,8 +96,15 @@ export default configure((/* ctx */) => {
 
       // publicPath: '/',
       // analyze: true,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      env: process.env as unknown as any,
+
+      env: Object.fromEntries(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Object.entries(process.env as unknown as any).filter(
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          ([_name, value]) => !(value as string).includes("\\")
+        )
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ) as unknown as any,
       // rawDefine: {},
       // ignorePublicFolder: true,
       // minify: false,
@@ -103,36 +120,43 @@ export default configure((/* ctx */) => {
                   // removes the protocol and replaces it with the port we're connecting to
                   host: process.env.GITPOD_WORKSPACE_URL.replace(
                     "https://",
-                    "9000-",
+                    "9000-"
                   ),
                   protocol: "wss",
-                  clientPort: 443,
+                  clientPort: 443
                 }
               : process.env.CODESPACE_NAME
               ? {
-                  host: `${process.env.CODESPACE_NAME}-9000.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`,
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  host: `${process.env.CODESPACE_NAME}-9000.${process.env
+                    .GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN!}`,
                   protocol: "wss",
-                  clientPort: 443,
+                  clientPort: 443
                 }
-              : true,
+              : true
           },
+          resolve: {
+            alias: {
+              "vue-router": join(__dirname, "modules-client/vue-router.js")
+            }
+          }
         })
       },
       viteVuePluginOptions: {
         template: {
           compilerOptions: {
-            nodeTransforms: !process.env.DEV ? [removeDataTestAttrs] : [],
-          },
-        },
+            nodeTransforms: !process.env.DEV ? [removeDataTestAttrs] : []
+          }
+        }
       },
 
-      vitePlugins,
+      vitePlugins
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
       // https: true
-      open: false, // opens browser window automatically
+      open: false // opens browser window automatically
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
@@ -140,11 +164,11 @@ export default configure((/* ctx */) => {
       config: {
         dark: true,
         loadingBar: {
-          color: "main",
+          color: "sakura"
         },
         notify: {
-          classes: "rounded-30px",
-        },
+          classes: "rounded-30px"
+        }
       },
 
       // iconSet: 'material-icons', // Quasar icon set
@@ -158,7 +182,7 @@ export default configure((/* ctx */) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: ["Notify", "Dialog", "Loading"],
+      plugins: ["Notify", "Dialog", "Loading"]
     },
 
     // animations: 'all', // --- includes all animations
@@ -194,8 +218,8 @@ export default configure((/* ctx */) => {
       // (gets superseded if process.env.PORT is specified at runtime)
 
       middlewares: [
-        "render", // keep this as last one
-      ],
+        "render" // keep this as last one
+      ]
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/developing-pwa/configuring-pwa
@@ -211,7 +235,7 @@ export default configure((/* ctx */) => {
       extendInjectManifestOptions(cfg) {
         cfg.globIgnores ??= []
         cfg.globIgnores.push("_redirects")
-      },
+      }
       // extendManifestJson (json) {}
       // extendPWACustomSWConf (esbuildConf) {}
     },
@@ -224,11 +248,15 @@ export default configure((/* ctx */) => {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/developing-capacitor-apps/configuring-capacitor
     capacitor: {
       hideSplashscreen: true,
+      appName: productName
     },
 
-    bin: {
-      linuxAndroidStudio: "./noop.sh",
-    },
+    bin: process.env.TEST
+      ? {
+          linuxAndroidStudio: "./noop.sh",
+          windowsAndroidStudio: "./noop"
+        }
+      : undefined,
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/developing-electron-apps/configuring-electron
     electron: {
@@ -253,16 +281,16 @@ export default configure((/* ctx */) => {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: "manga-raiku",
-      },
+        appId: "manga-raiku"
+      }
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/developing-browser-extensions/configuring-bex
     bex: {
-      contentScripts: ["my-content-script"],
+      contentScripts: ["my-content-script"]
 
       // extendBexScriptsConf (esbuildConf) {}
       // extendBexManifestJson (json) {}
-    },
+    }
   }
 })
