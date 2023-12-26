@@ -134,11 +134,6 @@ export default configure((/* ctx */ { modeName, prod }) => {
                   clientPort: 443
                 }
               : true
-          },
-          resolve: {
-            alias: {
-              "vue-router": join(__dirname, "modules-client/vue-router.js")
-            }
           }
         })
       },
