@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -122,8 +122,8 @@ devDependencies:
     specifier: ^5.49.0
     version: 5.49.0(eslint@8.33.0)(typescript@5.0.4)
   '@unocss/transformer-directives':
-    specifier: ^0.55.2
-    version: 0.55.2
+    specifier: ^0.58.4
+    version: 0.58.4
   '@vitest/ui':
     specifier: ^0.31.0
     version: 0.31.0(vitest@0.31.0)
@@ -4346,7 +4346,7 @@ packages:
       colorette: 2.0.20
       consola: 3.2.2
       fast-glob: 3.3.2
-      magic-string: 0.30.2
+      magic-string: 0.30.5
       pathe: 1.1.1
       perfect-debounce: 1.0.0
     transitivePeerDependencies:
@@ -4365,8 +4365,8 @@ packages:
     resolution: {integrity: sha512-JvmpuFOiJ8NkGzRmh0dCUmNdYjr8MmMtCX+czCmSnX2kvKyQjJIw3RIu84/DQbd/M/yxZmPjle8DrcZ1Ql86rQ==}
     dev: true
 
-  /@unocss/core@0.55.2:
-    resolution: {integrity: sha512-ZLEES8RDgWoK/vttUzl3PM2bZqL3HvhLgj8xdDa09Xw+JiTlR4c66s+hLn52oCoJTnT9lGsD2j7tTGN9ToSiTA==}
+  /@unocss/core@0.58.4:
+    resolution: {integrity: sha512-wh4pxXUCkhC+C/0ct74PMYeZgX+oWuHj2mnvr09nM0WmvOm1HeeISrDCCBGcxmKbErUk+D1v3JgzXF7b6j2l4g==}
     dev: true
 
   /@unocss/extractor-arbitrary-variants@0.53.4:
@@ -4392,7 +4392,7 @@ packages:
       '@unocss/core': 0.53.4
       css-tree: 2.3.1
       fast-glob: 3.3.2
-      magic-string: 0.30.2
+      magic-string: 0.30.5
       postcss: 8.4.32
     dev: true
 
@@ -4458,6 +4458,14 @@ packages:
     resolution: {integrity: sha512-NMqntd9CE9EpdtI2ELGCZg9Z2ySMdo/ljepP8QwfRmWbYaXUf3T/GJsOTqewbhNgJUGYinbs1OtiN0yG5xZjJQ==}
     dev: true
 
+  /@unocss/rule-utils@0.58.4:
+    resolution: {integrity: sha512-52Jp4I+joGTaDm7ehB/7uZ2kJL+9BZcYRDUVk4IDacDH5W9yxf1F75LzYT8jJVWXD/HIhiS0r9V6qhcBq2OWZw==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@unocss/core': 0.58.4
+      magic-string: 0.30.5
+    dev: true
+
   /@unocss/scope@0.53.4:
     resolution: {integrity: sha512-vomyjd6i27V5G2awPoo9FoUit6qYyDyO0kroLzYPPNgq5M5jQFrZuQYc24dQ+JeJAQ3hlCGl8VM2v3Aj0PyUFg==}
     dev: true
@@ -4487,10 +4495,11 @@ packages:
       css-tree: 2.3.1
     dev: true
 
-  /@unocss/transformer-directives@0.55.2:
-    resolution: {integrity: sha512-IJKL5clOiv2RjvHYr4xumS4eFScPsi3Vg4vGugsmn43PZ1FsApp8UElHfhuhBsEEiffnsgTD+N5u/EiPpyI0Gw==}
+  /@unocss/transformer-directives@0.58.4:
+    resolution: {integrity: sha512-5g2XVhwpmu2IrGHqPwxh+S3ZtkC/AwAtLIBLWB1QNhY3HVzAAaOzcif6uarngrCTTDQSDmsjzm8TSAq26LtCmQ==}
     dependencies:
-      '@unocss/core': 0.55.2
+      '@unocss/core': 0.58.4
+      '@unocss/rule-utils': 0.58.4
       css-tree: 2.3.1
     dev: true
 
@@ -4514,7 +4523,7 @@ packages:
       '@unocss/transformer-directives': 0.53.4
       chokidar: 3.5.3
       fast-glob: 3.3.2
-      magic-string: 0.30.2
+      magic-string: 0.30.5
       vite: 2.9.16(sass@1.32.11)
     transitivePeerDependencies:
       - rollup
@@ -4551,7 +4560,7 @@ packages:
   /@vitest/snapshot@0.31.0:
     resolution: {integrity: sha512-5dTXhbHnyUMTMOujZPB0wjFjQ6q5x9c8TvAsSPUNKjp1tVU7i9pbqcKPqntyu2oXtmVxKbuHCqrOd+Ft60r4tg==}
     dependencies:
-      magic-string: 0.30.2
+      magic-string: 0.30.5
       pathe: 1.1.1
       pretty-format: 27.5.1
     dev: true
@@ -4772,7 +4781,7 @@ packages:
       '@vue/reactivity-transform': 3.3.4
       '@vue/shared': 3.3.4
       estree-walker: 2.0.2
-      magic-string: 0.30.2
+      magic-string: 0.30.5
       postcss: 8.4.29
       source-map-js: 1.0.2
     dev: true
@@ -10600,13 +10609,6 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /magic-string@0.30.2:
-    resolution: {integrity: sha512-lNZdu7pewtq/ZvWUp9Wpf/x7WzMTsR26TWV03BRZrXFsv+BI6dy8RAiKgm1uM/kyR0rCfUcqvOlXKG66KhIGug==}
-    engines: {node: '>=12'}
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.4.15
-    dev: true
-
   /magic-string@0.30.5:
     resolution: {integrity: sha512-7xlpfBaQaP/T6Vh8MO/EqXSW5En6INHEvEXQiuff7Gku0PWjU3uf6w/j9o7O+SpB5fOAkrI5HeoNgwjEO0pFsA==}
     engines: {node: '>=12'}
@@ -13766,7 +13768,7 @@ packages:
       escape-string-regexp: 5.0.0
       fast-glob: 3.3.2
       local-pkg: 0.4.3
-      magic-string: 0.30.2
+      magic-string: 0.30.5
       mlly: 1.4.2
       pathe: 1.1.1
       pkg-types: 1.0.3
