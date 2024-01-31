@@ -43,3 +43,5 @@ coverage/
 
 # Local Netlify folder
 .netlify
+
+.nx

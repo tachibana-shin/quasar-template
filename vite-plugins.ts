@@ -13,7 +13,6 @@ import type { Plugin } from "vite"
 import { ViteImageOptimizer as ImageOptimizer } from "vite-plugin-image-optimizer"
 import imagePresets, { widthPreset } from "vite-plugin-image-presets"
 import RemoveConsole from "vite-plugin-remove-console"
-import ReWriteAll from "vite-plugin-rewrite-all"
 import Layouts from "vite-plugin-vue-layouts"
 
 import vitePluginBuildRaw from "./modules/vite-plugin-build-raw"
@@ -32,7 +31,6 @@ export const vitePlugins: [
       importMode: () => "async"
     }
   ],
-  [ReWriteAll, {}],
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [RemoveConsole as unknown as any, {}],
   [
