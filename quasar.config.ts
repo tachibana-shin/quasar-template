@@ -6,12 +6,9 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
-import { join } from "path"
-
 // eslint-disable-next-line n/no-extraneous-import
 import type { RootNode, TemplateChildNode } from "@vue/compiler-core"
 import dotenv from "dotenv"
-import { cleanEnv, str } from "envalid"
 import { extend } from "quasar"
 import { configure } from "quasar/wrappers"
 
@@ -32,8 +29,8 @@ function removeDataTestAttrs(
   }
 }
 
-export default configure((/* ctx */ { modeName, prod }) => {
-  const APP_NATIVE_MOBILE = ["capacitor", "cordova"].includes(modeName)
+export default configure((/* ctx */ { prod }) => {
+  // const APP_NATIVE_MOBILE = ["capacitor", "cordova"].includes(modeName)
 
   // cleanEnv(process.env, {
   //   SUPABASE_PROJECT_URL: str(),
@@ -127,7 +124,7 @@ export default configure((/* ctx */ { modeName, prod }) => {
                 }
               : process.env.CODESPACE_NAME
               ? {
-                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                   
                   host: `${process.env.CODESPACE_NAME}-9000.${process.env
                     .GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN!}`,
                   protocol: "wss",

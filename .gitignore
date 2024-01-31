@@ -45,3 +45,7 @@ coverage/
 .netlify
 
 .nx
+
+/.eslint-auto-import.json
+/auto-imports.d.ts
+/components.d.ts

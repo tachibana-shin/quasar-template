@@ -19,6 +19,9 @@
     "esModuleInterop": true,
     "lib": ["esnext", "DOM"]
   },
+  "exclude": [
+    "./quasar.config.js"
+  ],
   "vueCompilerOptions": {
     "target": 3, // or 2.7 for Vue 2
     "plugins": [
