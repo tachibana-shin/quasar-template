@@ -6,7 +6,9 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
-// eslint-disable-next-line n/no-extraneous-import
+import { resolve } from "path"
+
+import type { ConfigureCallback } from "@quasar/app-vite"
 import type { RootNode, TemplateChildNode } from "@vue/compiler-core"
 import dotenv from "dotenv"
 import { extend } from "quasar"
@@ -42,8 +44,9 @@ export default configure((/* ctx */ { prod }) => {
   //       })
   // })
 
-  return {
-    eslint: {
+  const conf: ReturnType<ConfigureCallback> = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ["eslint" as unknown as any]: {
       fix: true,
       // include = [],
       // exclude = [],
@@ -79,6 +82,10 @@ export default configure((/* ctx */ { prod }) => {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
+      alias: {
+        logic: resolve(__dirname, "src/logic"),
+        api: resolve(__dirname, "src/api")
+      },
       target: {
         browser: ["es2019", "edge88", "firefox78", "chrome87", "safari13.1"],
         node: "node16"
@@ -89,7 +96,8 @@ export default configure((/* ctx */ { prod }) => {
       // vueDevtools,
       // vueOptionsAPI: false,
 
-      rebuildCache: false, // rebuilds Vite/linter/etc cache on startup
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ["rebuildCache" as unknown as any]: false, // rebuilds Vite/linter/etc cache on startup
 
       // publicPath: '/',
       // analyze: true,
@@ -123,14 +131,13 @@ export default configure((/* ctx */ { prod }) => {
                   clientPort: 443
                 }
               : process.env.CODESPACE_NAME
-              ? {
-                   
-                  host: `${process.env.CODESPACE_NAME}-9000.${process.env
-                    .GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN!}`,
-                  protocol: "wss",
-                  clientPort: 443
-                }
-              : true
+                ? {
+                    host: `${process.env.CODESPACE_NAME}-9000.${process.env
+                      .GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN!}`,
+                    protocol: "wss",
+                    clientPort: 443
+                  }
+                : true
           }
         })
       },
@@ -139,6 +146,9 @@ export default configure((/* ctx */ { prod }) => {
           compilerOptions: {
             nodeTransforms: !process.env.DEV ? [removeDataTestAttrs] : []
           }
+        },
+        script: {
+          defineModel: true
         }
       },
 
@@ -174,7 +184,7 @@ export default configure((/* ctx */ { prod }) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: ["Notify", "Dialog", "Loading"]
+      plugins: ["Notify", "Dialog", "Loading", "AppFullscreen"]
     },
 
     // animations: 'all', // --- includes all animations
@@ -268,12 +278,6 @@ export default configure((/* ctx */ { prod }) => {
         // protocol: 'myapp://path',
         // Windows only
         // win32metadata: { ... }
-      },
-
-      builder: {
-        // https://www.electron.build/configuration/configuration
-
-        appId: "manga-raiku"
       }
     },
 
@@ -285,4 +289,6 @@ export default configure((/* ctx */ { prod }) => {
       // extendBexManifestJson (json) {}
     }
   }
+
+  return conf
 })
